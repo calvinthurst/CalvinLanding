@@ -39,6 +39,14 @@ public class AccountsRepository
             SET 
               name = @Name,
               picture = @Picture
+              email = @Email
+              savePage = @savePage
+              savePageTitle = @savePageTitle
+              gold = @gold
+              health = @health
+              attack = @attack
+              lives = @lives
+              characterModel = @characterModel
             WHERE id = @Id;";
     _db.Execute(sql, update);
     return update;

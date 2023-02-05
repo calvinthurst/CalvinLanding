@@ -10,6 +10,7 @@ public class Monster
   public int gold { get; set; }
   public string picture { get; set; }
   public string description { get; set; }
+  public bool isBoss { get; set; }
   public int monsterModel { get; set; }
   public MonsterModel monsterSprite { get; set; }
 }

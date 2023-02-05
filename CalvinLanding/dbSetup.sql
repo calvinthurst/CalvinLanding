@@ -13,7 +13,7 @@ CREATE TABLE
         attack int DEFAULT 1 COMMENT 'Attack',
         lives int DEFAULT 3 COMMENT 'Lives',
         characterModel INT NOT NULL DEFAULT 1 COMMENT 'Character Model',
-        FOREIGN KEY (characterModel) REFERENCES playerModel(id)
+        FOREIGN KEY (characterModel) REFERENCES playerModel(id) ON DELETE CASCADE
     ) default charset utf8 COMMENT '';
 
 CREATE TABLE
@@ -27,8 +27,9 @@ CREATE TABLE
         gold int DEFAULT 0 COMMENT 'Gold',
         picture varchar(255) COMMENT 'Monster Picture',
         description varchar(255) COMMENT 'Monster Description',
+        isBoss BOOLEAN DEFAULT FALSE COMMENT 'Is Boss',
         monsterModel INT NOT NULL DEFAULT 1 COMMENT 'Monster Model',
-        FOREIGN KEY (monsterModel) REFERENCES monsterModels(id)
+        FOREIGN KEY (monsterModel) REFERENCES monsterModels(id) ON DELETE CASCADE
     ) default charset utf8 COMMENT '';
 
 CREATE TABLE
@@ -41,7 +42,7 @@ CREATE TABLE
         picture varchar(255) COMMENT 'Item Picture',
         description varchar(255) COMMENT 'Item Description',
         itemModel INT NOT NULL DEFAULT 1 COMMENT 'Item Model',
-        FOREIGN KEY (itemModel) REFERENCES itemsModels(id)
+        FOREIGN KEY (itemModel) REFERENCES itemsModels(id) ON DELETE CASCADE
     ) default charset utf8 COMMENT '';
 
 CREATE TABLE
@@ -51,8 +52,8 @@ CREATE TABLE
         updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Last Update',
         accountId varchar(255) COMMENT 'Account Id',
         itemId INT COMMENT 'Item Id',
-        FOREIGN KEY (accountId) REFERENCES accounts(id),
-        FOREIGN KEY (itemId) REFERENCES items(id)
+        FOREIGN KEY (accountId) REFERENCES accounts(id) ON DELETE CASCADE,
+        FOREIGN KEY (itemId) REFERENCES items(id) ON DELETE CASCADE
     ) default charset utf8 COMMENT '';
 
 CREATE TABLE
@@ -62,8 +63,8 @@ CREATE TABLE
         updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Last Update',
         accountId varchar(255) COMMENT 'Account Id',
         monsterId INT COMMENT 'Monster Id',
-        FOREIGN KEY (accountId) REFERENCES accounts(id),
-        FOREIGN KEY (monsterId) REFERENCES monsters(id)
+        FOREIGN KEY (accountId) REFERENCES accounts(id) ON DELETE CASCADE,
+        FOREIGN KEY (monsterId) REFERENCES monsters(id) ON DELETE CASCADE
     ) default charset utf8 COMMENT '';
 
 CREATE TABLE
@@ -73,8 +74,8 @@ CREATE TABLE
         updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Last Update',
         accountMonsterId INT NOT NULL COMMENT 'Account Monster Id',
         itemId INT NOT NULL COMMENT 'Item Id',
-        FOREIGN KEY (accountMonsterId) REFERENCES accountMonsters(id),
-        FOREIGN KEY (itemId) REFERENCES items(id)
+        FOREIGN KEY (accountMonsterId) REFERENCES accountMonsters(id) ON DELETE CASCADE,
+        FOREIGN KEY (itemId) REFERENCES items(id) ON DELETE CASCADE
     ) default charset utf8 COMMENT '';
 
 CREATE TABLE
@@ -135,6 +136,6 @@ CREATE TABLE
         itemId INT NOT NULL COMMENT 'Item Id',
         price INT NOT NULL COMMENT 'Item Price',
         playerModel INT NOT NULL COMMENT 'Player Model',
-        FOREIGN KEY (itemId) REFERENCES items(id),
-        FOREIGN KEY (playerModel) REFERENCES playerModel(id)
+        FOREIGN KEY (itemId) REFERENCES items(id) ON DELETE CASCADE,
+        FOREIGN KEY (playerModel) REFERENCES playerModel(id) ON DELETE CASCADE
     ) DEFAULT CHARSET utf8 COMMENT '';
