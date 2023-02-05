@@ -5,10 +5,12 @@ namespace CalvinLanding.Controllers;
 public class ItemShopController : ControllerBase
 {
   private readonly ItemShopService _itemShopService;
+  private readonly Auth0Provider _auth0Provider;
 
-  public ItemShopController(ItemShopService itemShopService)
+  public ItemShopController(ItemShopService itemShopService, Auth0Provider auth0Provider)
   {
     _itemShopService = itemShopService;
+    _auth0Provider = auth0Provider;
   }
 
   [HttpGet]
@@ -38,11 +40,13 @@ public class ItemShopController : ControllerBase
   }
 
   [HttpPost]
-  public ActionResult<ItemShop> Create([FromBody] ItemShop newItem)
+  [Authorize]
+  public async Task<ActionResult<ItemShop>> Create([FromBody] ItemShop newItem)
   {
     try
     {
-      return Ok(_itemShopService.Create(newItem));
+      Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
+      return Ok(_itemShopService.Create(newItem, userInfo.Id));
     }
     catch (Exception e)
     {

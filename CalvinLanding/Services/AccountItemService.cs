@@ -27,6 +27,10 @@ public class AccountItemService
     }
     return found;
   }
+  public List<AccountItems> GetAccountItems(string accountId)
+  {
+    return _repo.GetByAccountId(accountId);
+  }
 
   public AccountItems Create(AccountItems newItem, string accountId)
   {

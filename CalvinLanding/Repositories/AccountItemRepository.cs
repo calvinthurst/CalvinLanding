@@ -33,6 +33,24 @@ public class AccountItemRepository
     }, new { id }).FirstOrDefault();
   }
 
+  public List<AccountItems> GetByAccountId(string accountId)
+  {
+    string sql = @"SELECT 
+    ai.*,
+    i.*,
+    a.*
+    FROM accountItems ai
+    JOIN items i ON ai.itemId = i.id
+    JOIN accounts a ON ai.accountId = a.id
+    WHERE ai.accountId = @accountId;";
+    return _db.Query<AccountItems, Item, Account, AccountItems>(sql, (accountItem, item, account) =>
+    {
+      accountItem.item = item;
+      accountItem.account = account;
+      return accountItem;
+    }, new { accountId }).ToList();
+  }
+
   public int Create(AccountItems newItem)
   {
     string sql = @"

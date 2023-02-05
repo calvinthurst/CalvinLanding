@@ -46,6 +46,23 @@ CREATE TABLE
     ) default charset utf8 COMMENT '';
 
 CREATE TABLE
+    IF NOT EXISTS nonPlayableCharacters(
+        id INT NOT NULL primary key COMMENT 'primary key',
+        createdAt DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT 'Time Created',
+        updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Last Update',
+        name varchar(255) COMMENT 'Non Playable Character Name',
+        health int DEFAULT 0 COMMENT 'Health',
+        attack int DEFAULT 0 COMMENT 'Attack',
+        gold int DEFAULT 100 COMMENT 'Gold',
+        picture varchar(255) COMMENT 'Non Playable Character Picture',
+        description varchar(255) COMMENT 'Non Playable Character Description',
+        accountItemId INT NOT NULL COMMENT 'Account Item Id',
+        nonPlayableCharacterModel INT NOT NULL DEFAULT 1 COMMENT 'Non Playable Character Model',
+        FOREIGN KEY (accountItemId) REFERENCES accountItems(id) ON DELETE CASCADE,
+        FOREIGN KEY (nonPlayableCharacterModel) REFERENCES playerModel(id) ON DELETE CASCADE
+    ) default charset utf8 COMMENT '';
+
+CREATE TABLE
     IF NOT EXISTS accountItems(
         id INT NOT NULL primary key COMMENT 'primary key',
         createdAt DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT 'Time Created',
