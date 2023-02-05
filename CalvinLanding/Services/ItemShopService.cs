@@ -3,10 +3,12 @@ namespace CalvinLanding.Services;
 public class ItemShopService
 {
   private readonly ItemShopRepository _repo;
+  private readonly AccountItemService _accountItemsService;
 
-  public ItemShopService(ItemShopRepository repo)
+  public ItemShopService(ItemShopRepository repo, AccountItemService accountItemsService)
   {
     _repo = repo;
+    _accountItemsService = accountItemsService;
   }
 
   public List<ItemShop> Get()
@@ -24,8 +26,9 @@ public class ItemShopService
     return found;
   }
 
-  public ItemShop Create(ItemShop newItem)
+  public ItemShop Create(ItemShop newItem, string accountId)
   {
+
     return _repo.Create(newItem);
   }
 
