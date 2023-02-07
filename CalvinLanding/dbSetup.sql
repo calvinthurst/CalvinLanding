@@ -137,10 +137,11 @@ CREATE TABLE
 CREATE TABLE
     IF NOT EXISTS project(
         id INT NOT NULL primary key COMMENT 'primary key',
-        url varchar(255) COMMENT 'Project Url',
         name varchar(255) COMMENT 'Project Name',
         description varchar(255) COMMENT 'Project Description',
-        picture varchar(255) COMMENT 'Project Picture'
+        picture varchar(255) COMMENT 'Project Picture',
+        deployedUrl varchar(255) COMMENT 'Project Deployed Url',
+        githubUrl varchar(255) COMMENT 'Project Github Url'
     ) DEFAULT CHARSET utf8 COMMENT '';
 
 CREATE TABLE

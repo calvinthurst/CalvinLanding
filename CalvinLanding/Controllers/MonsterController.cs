@@ -71,5 +71,6 @@ public class MonsterController : ControllerBase
       return BadRequest(e.Message);
     }
   }
+
 }
 
