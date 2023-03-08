@@ -25,6 +25,20 @@ public class AccountItemController : ControllerBase
       return BadRequest(e.Message);
     }
   }
+  [HttpGet("user")]
+  [Authorize]
+  public async Task<ActionResult<List<AccountItems>>> GetAccountItems()
+  {
+    try
+    {
+      Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
+      return Ok(_accountItemService.GetAccountItems(userInfo.Id));
+    }
+    catch (Exception e)
+    {
+      return BadRequest(e.Message);
+    }
+  }
 
   [HttpGet("{id}")]
   public ActionResult<AccountItems> Get(int id)

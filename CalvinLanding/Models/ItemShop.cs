@@ -9,6 +9,6 @@ public class ItemShop
   public int price { get; set; }
   public int playerModelId { get; set; }
   public PlayerModel playerModel { get; set; }
-  public Item item { get; set; }
+  public List<Item> item { get; set; }
 
 }

@@ -48,4 +48,5 @@ public class AccountService
     original.characterModel = editData.characterModel > 0 ? editData.characterModel : original.characterModel;
     return _repo.Edit(original);
   }
+
 }
