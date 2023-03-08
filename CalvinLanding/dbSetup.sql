@@ -13,7 +13,7 @@ CREATE TABLE
         attack int DEFAULT 1 COMMENT 'Attack',
         lives int DEFAULT 3 COMMENT 'Lives',
         characterModel INT NOT NULL DEFAULT 1 COMMENT 'Character Model',
-        FOREIGN KEY (characterModel) REFERENCES playerModel(id) ON DELETE CASCADE
+        FOREIGN KEY (characterModel) REFERENCES playerModel(id) ON DELETE CASCADE FOREIGN KEY (id) REFERENCES mapModel(id) ON DELETE CASCADE
     ) default charset utf8 COMMENT '';
 
 CREATE TABLE
@@ -155,5 +155,17 @@ CREATE TABLE
         price INT NOT NULL COMMENT 'Item Price',
         playerModel INT NOT NULL COMMENT 'Player Model',
         FOREIGN KEY (itemId) REFERENCES items(id) ON DELETE CASCADE,
+        FOREIGN KEY (playerModel) REFERENCES playerModel(id) ON DELETE CASCADE
+    ) DEFAULT CHARSET utf8 COMMENT '';
+
+CREATE TABLE
+    if not exists mapModel(
+        id INT NOT NULL primary key COMMENT 'primary key',
+        createdAt DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT 'Time Created',
+        updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Last Update',
+        name varchar(255) COMMENT 'Map Model Name',
+        description varchar(255) COMMENT 'Map Model Description',
+        picture varchar(255) COMMENT 'Map Model Picture',
+        playerModel INT NOT NULL COMMENT 'Player Model',
         FOREIGN KEY (playerModel) REFERENCES playerModel(id) ON DELETE CASCADE
     ) DEFAULT CHARSET utf8 COMMENT '';
